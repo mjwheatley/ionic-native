@@ -64,6 +64,30 @@ export interface AndroidFingerprintAuthOptions {
 }
 
 /**
+ * Interface for Android Fingerprint Auth plugin errors
+ */
+export interface AndroidFingerprintAuthErrors {
+  BAD_PADDING_EXCEPTION: string;
+  CERTIFICATE_EXCEPTION: string;
+  FINGERPRINT_CANCELLED: string;
+  FINGERPRINT_DATA_NOT_DELETED: string;
+  FINGERPRINT_ERROR: string;
+  FINGERPRINT_NOT_AVAILABLE: string;
+  FINGERPRINT_PERMISSION_DENIED: string;
+  FINGERPRINT_PERMISSION_DENIED_SHOW_REQUEST: string;
+  ILLEGAL_BLOCK_SIZE_EXCEPTION: string;
+  INIT_CIPHER_FAILED: string;
+  INVALID_ALGORITHM_PARAMETER_EXCEPTION: string;
+  IO_EXCEPTION: string;
+  JSON_EXCEPTION: string;
+  MINIMUM_SDK: string;
+  MISSING_ACTION_PARAMETERS: string;
+  MISSING_PARAMETERS: string;
+  NO_SUCH_ALGORITHM_EXCEPTION: string;
+  SECURITY_EXCEPTION: string;
+}
+
+/**
  * @name Android Fingerprint Auth
  * @description
  * This plugin will open a native dialog fragment prompting the user to authenticate using their fingerprint. If the device has a secure lockscreen (pattern, PIN, or password), the user may opt to authenticate using that method as a backup.
@@ -86,7 +110,7 @@ export interface AndroidFingerprintAuthOptions {
  *            } else console.log('Didn\'t authenticate!');
  *         })
  *         .catch(error => {
- *            if (error === "Cancelled") {
+ *            if (error === FingerprintAuth.ERRORS.FINGERPRINT_CANCELLED) {
  *              console.log("Fingerprint authentication cancelled");
  *            } else console.error(error)
  *         });
@@ -99,6 +123,7 @@ export interface AndroidFingerprintAuthOptions {
  * ```
  * @interfaces
  * AndroidFingerprintAuthOptions
+ * AndroidFingerprintAuthErrors
  */
 @Plugin({
   pluginName: 'AndroidFingerprintAuth',
@@ -164,4 +189,25 @@ export class AndroidFingerprintAuth {
    */
   @Cordova()
   static delete(options: {clientId: string; username: string; }): Promise<{deleted: boolean}> { return; }
+  
+  static ERRORS:IAndroidFingerprintAuthErrors = {
+    BAD_PADDING_EXCEPTION: "BAD_PADDING_EXCEPTION",
+    CERTIFICATE_EXCEPTION: "CERTIFICATE_EXCEPTION",
+    FINGERPRINT_CANCELLED: "FINGERPRINT_CANCELLED",
+    FINGERPRINT_DATA_NOT_DELETED: "FINGERPRINT_DATA_NOT_DELETED",
+    FINGERPRINT_ERROR: "FINGERPRINT_ERROR",
+    FINGERPRINT_NOT_AVAILABLE: "FINGERPRINT_NOT_AVAILABLE",
+    FINGERPRINT_PERMISSION_DENIED: "FINGERPRINT_PERMISSION_DENIED",
+    FINGERPRINT_PERMISSION_DENIED_SHOW_REQUEST: "FINGERPRINT_PERMISSION_DENIED_SHOW_REQUEST",
+    ILLEGAL_BLOCK_SIZE_EXCEPTION: "ILLEGAL_BLOCK_SIZE_EXCEPTION",
+    INIT_CIPHER_FAILED: "INIT_CIPHER_FAILED",
+    INVALID_ALGORITHM_PARAMETER_EXCEPTION: "INVALID_ALGORITHM_PARAMETER_EXCEPTION",
+    IO_EXCEPTION: "IO_EXCEPTION",
+    JSON_EXCEPTION: "JSON_EXCEPTION",
+    MINIMUM_SDK: "MINIMUM_SDK",
+    MISSING_ACTION_PARAMETERS: "MISSING_ACTION_PARAMETERS",
+    MISSING_PARAMETERS: "MISSING_PARAMETERS",
+    NO_SUCH_ALGORITHM_EXCEPTION: "NO_SUCH_ALGORITHM_EXCEPTION",
+    SECURITY_EXCEPTION: "SECURITY_EXCEPTION"
+  }
 }
